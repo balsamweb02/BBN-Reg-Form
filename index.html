@@ -122,9 +122,10 @@ body{
   position: relative; z-index: 1;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(1.7rem, 2.6vw, 2.15rem);
-  line-height: 1.22;
-  margin: 22px 0 14px;
+  font-size: clamp(1.0rem, 2.2vw, 1.9rem);
+  line-height: 1.5;
+  margin: 18px 0 16px;
+   text-align: center;
 }
 .info-panel .lede{
   position: relative; z-index: 1;
@@ -132,6 +133,10 @@ body{
   color: rgba(255,255,255,0.82);
   max-width: 38ch;
   margin-bottom: 30px;
+}
+.info-panel h1 span{
+    letter-spacing: 0.03em;
+    font-size: clamp(1.5rem, 2.2vw, 2.1rem);
 }
 
 /* Registration steps — signature element: each node is a step in
@@ -141,7 +146,7 @@ body{
   display: flex;
   flex-direction: column;
   gap: 0;
-  margin-top: auto;
+  margin-top: 16px;
 }
 .chain-node{
   display: flex;
@@ -524,7 +529,8 @@ form.hidden{ display: none; }
     <div class="info-glow"></div>
     <div class="info-eyebrow"><span class="dot"></span> Registration Opening Soon</div>
 <h1>
-  Join Our Community BBN
+  Join Our Community<br>
+  <span>BBN</span>
 </h1>
 
 <p class="lede">Balsam Business Network brings entrepreneurs, business owners, professionals, and startups into one trusted community. Register your interest and our team will follow up as we open enrollment.</p>
