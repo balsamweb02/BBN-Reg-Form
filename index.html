@@ -657,14 +657,25 @@ form.hidden{ display: none; }
   }
 
   function validators(){
-    return {
-      name: () => document.getElementById('name').value.trim().length > 1,
-      business: () => document.getElementById('business').value.trim().length > 1,
-      email: () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value.trim()),
-      phone: () => document.getElementById('phone').value.trim().length >= 7,
-      message: () => document.getElementById('message').value.trim().length > 4
-    };
-  }
+  return {
+    name: () => document.getElementById('name').value.trim().length > 1,
+    business: () => document.getElementById('business').value.trim().length > 1,
+    email: () => {
+      const v = document.getElementById('email').value.trim();
+      // stricter RFC-ish pattern: no consecutive dots, valid TLD length
+      return /^[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/.test(v);
+    },
+    phone: () => {
+      const v = document.getElementById('phone').value.trim();
+      const digitsOnly = v.replace(/[^\d]/g, '');
+      // allow +, spaces, dashes, parentheses in the raw input,
+      // but require 7–15 actual digits underneath
+      const shapeOk = /^[+]?[\d\s\-().]{7,20}$/.test(v);
+      return shapeOk && digitsOnly.length ==10;
+    },
+    message: () => document.getElementById('message').value.trim().length > 4
+  };
+}
 
   // live-clear errors + show a valid checkmark as the user types
   ['name','business','email','phone','message'].forEach(function(id){
